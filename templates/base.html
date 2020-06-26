@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" style="background-color: #00acff">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Cutting list
+    </title>
+    <!-- Bootstrap -->
+    <!-- Core CSS file -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}"/>
+    <link rel="main script" href="{% static 'scripts/base.js' %}"/>
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}"/>
+</head>
+<body class="box-2" id="mainBody"
+      style="max-width: 70%; min-width: 70%; height: 100%; margin-left: 15%; border:1px solid black; background: #ededed">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<header id="top" style="margin-top: 50px">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 ">
+                <image alt="here will be the logo" src="{% static 'images/engielogo.png' %}" width="296" height="90"
+                       style="margin-left: 75px"></image>
+            </div>
+            <div class="col-sm-3 ">
+
+            </div>
+            <div class="col-sm-6">
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="control-label col-sm-3" for="document" style="font-size: 18px">Document:</label>
+                        <div class="col-sm-6">
+                            <input type="email" class="form-control" id="document" placeholder="document">
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin-top: -18px">
+                        <label class="control-label col-sm-3" for="revision" style="font-size: 18px">Revision:</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="revision" placeholder="revision">
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin-top: -18px">
+                        <label class="control-label col-sm-3" for="iso" style="font-size: 18px">ISO:</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="iso" placeholder="iso">
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin-top: -18px">
+                        <label class="control-label col-sm-3" for="iso" style="font-size: 18px">Materiaal:</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="material" placeholder="xxxxx">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <form class="form-horizontal">
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="projectnr" style="font-size: 18px"> Project nummer:
+                </label>
+                <div class="col-sm-3">
+                    <input class="form-control" id="projectnr" placeholder="Enter project number">
+                </div>
+            </div>
+            <div class="form-group row" style="margin-top: -18px">
+                <label class="control-label col-sm-2" for="date" style="font-size: 18px"> Datum: </label>
+                <div class="col-sm-3">
+                    <input class="form-control" id="date" placeholder="Enter date">
+                </div>
+            </div>
+            <div class="form-group row" style="margin-top: -18px">
+                <label class="control-label col-sm-2" for="name" style="font-size: 18px">Naam:</label>
+                <div class="col-sm-3">
+                    <input class="form-control" id="name" placeholder="Enter name">
+                </div>
+                <button type="button" class="firstButton" onclick="CSVExportMaster()"><strong>csv file Opslaan</strong>
+                </button>
+            </div>
+        </form>
+    </div>
+</header>
+<section id="main" style="margin-top: 50px; background: #ededed;">
+    <div class="container" id="tableDiv">
+        <form id="1form">
+            <table class="table table-bordered" style="background: white; border: 0;">
+                <thread>
+                    <tr>
+                        <td valign="middle" align="center">
+                            <div class="row">
+                                <div style="margin-left: 5px;">Nr</div>
+                                <div style="margin-left: 40px;">Spool</div>
+                                <div style="margin-left: 15px;">Diameter</div>
+                                <div style="margin-left: 10px;">Wanddikte</div>
+                                <div style="margin-left: 10px;">Voor-openning</div>
+                                <div style="margin-left: 10px;">Component A</div>
+                                <div style="margin-left: 15px;">Component B</div>
+                                <div style="margin-left: 10px;">Batch</div>
+                                <div style="margin-left: 15px;">Charge</div>
+                                <div style="margin-left: 8px;">Comment</div>
+                                <div style="margin-left: 150px;">
+                                    <input type="checkbox" style="width: 15px; height: 15px">
+                                </div>
+                                <div style="margin-left: 5px;">Use DN</div>
+                            </div>
+                            <div class="row">
+                                <div style="margin-left: 5px"><input class="table-control" id="butchHolder"
+                                                                     style="width: 50px; height: 25px"/></div>
+                                <div style="margin-left: 5px"><input class="table-control" id="spoolHolder"
+                                                                     style="width: 50px; height: 25px"/></div>
+                                <div style="margin-left: 5px"><input class="table-control" id="diameterHolder"
+                                                                     style="width: 70px; height: 25px"/></div>
+                                <div style="margin-left: 5px"><input class="table-control" id="diameterHolder"
+                                                                     style="width: 80px; height: 25px"/></div>
+                                <div style="margin-left: 5px"><input class="table-control" id="diameterHolder"
+                                                                     style="width: 110px; height: 25px"/></div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px"></select></div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px"></select></div>
+                                <div style="margin-left: 5px"><input class="table-control" id="butchHolder"
+                                                                     style="width: 50px; height: 25px"/></div>
+                                <div style="margin-left: 5px"><input class="table-control" id="butchHolder"
+                                                                     style="width: 50px; height: 25px"/></div>
+                                <div style="margin-left: 5px"><input class="table-control" id="butchHolder"
+                                                                     style="width: 100px; height: 25px"/></div>
+                                <button style="float: right; margin-left: 125px; width: 100px; height: 25px; margin-top: 0px; text-align: center; margin-bottom: 0px"
+                                        class="btn" type="button">Calculate
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div style="margin-left: 405px"><select style="width: 105px; height: 25px"></select>
+                                </div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px"></select></div>
+                            </div>
+                            <div class="row">
+                                <div style="margin-left: 405px"><select style="width: 105px; height: 25px"></select>
+                                </div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px"></select></div>
+                            </div>
+                            <div class="row">
+                                <div style="margin-left: 405px"><select style="width: 105px; height: 25px">
+                                    <option value="">Choose value</option>
+                                    <option>PE</option>
+                                    <option selected>BE</option>
+                                    <option>TE</option>
+                                    <option>SE</option>
+                                </select></div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px">
+                                    <option value="">Choose value</option>
+                                    <option>PE</option>
+                                    <option selected>BE</option>
+                                    <option>TE</option>
+                                    <option>SE</option>
+                                </select></div>
+                            </div>
+                        </td>
+                    </tr>
+                </thread>
+            </table>
+        </form>
+    </div>
+</section>
+<script src="{% static 'scripts/base.js' %}"></script>
+</body>
+</html>
