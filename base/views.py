@@ -57,7 +57,6 @@ def baseHTML(request):
 
 
 def secureBase(request):
-    print("here")
     password = request.GET.get("password", None)
     login = request.GET.get("login", None)
     if login == "123" and password == "123":
@@ -79,7 +78,6 @@ def finder(name):
     else:
         return "404"
 
-        return string
 
 
 def group1(name, var, diameter):

@@ -44,16 +44,11 @@ function CSVExportMaster() {
 
 function checkDia(obj) {
     var diameter = obj.value;
-    var flag = obj.parentNode.parentNode.getElementsByTagName("div")[10].getElementsByTagName("input")[0].checked;
+    var flag = obj.parentNode.parentNode.getElementsByTagName("div")[11].getElementsByTagName("input")[0].checked;
 
     var compAselect = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[19].childNodes[0];
     var compBselect = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[20].childNodes[0];
-    //alert(obj);
-    //alert(obj.parentNode);
-    //alert(obj.parentNode.parentNode.parentNode.parentNode.getElementsByTagName("div")[0]);
-    //alert(obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[11].childNodes[0].textContent);
-    //alert(obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[29].childNodes[0]);
-    obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[19].childNodes[0].style.borderColor = "blue";
+
     var compAvar1 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[27].childNodes[0];
     var compBvar1 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[28].childNodes[0];
 
@@ -61,27 +56,27 @@ function checkDia(obj) {
     var compBvar2 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[32].childNodes[0];
 
     var length = compAselect.options.length;
-    for (k = length - 1; k > 0; k--) {
+    for (k = length - 1; k >= 0; k--) {
         compAselect.options[k] = null;
     }
     length = compBselect.options.length;
-    for (k = length - 1; k > 0; k--) {
+    for (k = length - 1; k >= 0; k--) {
         compBselect.options[k] = null;
     }
     length = compAvar1.options.length;
-    for (k = length - 1; k > 0; k--) {
+    for (k = length - 1; k >= 0; k--) {
         compAvar1.options[k] = null;
     }
     length = compBvar1.options.length;
-    for (k = length - 1; k > 0; k--) {
+    for (k = length - 1; k >= 0; k--) {
         compBvar1.options[k] = null;
     }
     length = compAvar2.options.length;
-    for (k = length - 1; k > 0; k--) {
+    for (k = length - 1; k >= 0; k--) {
         compAvar2.options[k] = null;
     }
     length = compBvar2.options.length;
-    for (k = length - 1; k > 0; k--) {
+    for (k = length - 1; k >= 0; k--) {
         compBvar2.options[k] = null;
     }
 
@@ -99,8 +94,8 @@ function checkDia(obj) {
     compBvar1.style.borderColor = "black";
     compBvar2.style.borderColor = "black";
 
-    if (obj.value !== ""){
-        if (isFinite(obj.value)){
+    if (obj.value !== "") {
+        if (isFinite(obj.value)) {
             $.ajax({
                 type: 'GET',
                 url: "/checkDia",
@@ -112,9 +107,7 @@ function checkDia(obj) {
                     CapsInside = [];
                     TReducersIncome = false;
                     ReducersIncome = false;
-                    alert(JSON.stringify(response));
-                    if (response["valid"]){
-                        alert(2);
+                    if (response["valid"]) {
                         let tmpArr = [];
                         dict = {};
                         arrRec = [];
@@ -138,11 +131,7 @@ function checkDia(obj) {
                             Object.keys(names).forEach(function (key) { // Здесь key = "wallthickness"; value = 3
                                 var value = names[key];
                                 namesarr.push(value);
-                                //alert(key + " " + value);
-                                //alert(JSON.stringify(value));
                             });
-                            //alert(namesarr);
-                            //alert(arrRec);
 
                             TReducersIncome = JSON.parse(response["data5"]);
                             ReducersIncome = JSON.parse(response["data4"]);
@@ -176,16 +165,6 @@ function checkDia(obj) {
                                 }
                             }
 
-                            var length = compAselect.options.length;
-                            for (k = length - 1; k > 0; k--) {
-                                compAselect.options[k] = null;
-                            }
-
-                            var lengthB = compBselect.options.length;
-                            for (k = lengthB - 1; k > 0; k--) {
-                                compBselect.options[k] = null;
-                            }
-
                             Object.keys(dict).forEach(function (key) {
                                 var myOption = document.createElement("option");
                                 myOption.text = convertNameOfFlanges(key);
@@ -202,7 +181,7 @@ function checkDia(obj) {
                                 myOption = document.createElement("option");
                                 var myOption2 = document.createElement("option");
 
-                                if (!obj.parentNode.getElementsByTagName('input')[1].checked) {
+                                if (!flag) {
                                     myOption.text = convertNameOfFlanges('TReducer');
                                     myOption2.text = convertNameOfFlanges('TReducer');
                                 } else {
@@ -218,7 +197,7 @@ function checkDia(obj) {
                                 myOption = document.createElement("option");
                                 var myOption2 = document.createElement("option");
 
-                                if (!obj.parentNode.getElementsByTagName('input')[1].checked) {
+                                if (!flag) {
                                     myOption.text = convertNameOfFlanges('Reducer');
                                     myOption2.text = convertNameOfFlanges('Reducer');
                                 } else {
@@ -266,20 +245,6 @@ function checkDia(obj) {
                                 if (partRight !== null && partRight !== "null") {
                                     CapsInside.push(partRight)
                                 }
-                                /*if (partRight !== "") {
-                                    myOption = document.createElement("option");
-                                    var myOption2 = document.createElement("option");
-                                    myOption.text = 'T <= ' + partRight;
-                                    myOption2.text = 'T <= ' + partRight;
-                                    compAselect.add(myOption);
-                                    compBselect.add(myOption2);
-                                    var myOptionrev = document.createElement("option");
-                                    var myOption2rev = document.createElement("option");
-                                    myOptionrev.text = 'T > ' + partRight;
-                                    myOption2rev.text = 'T > ' + partRight;
-                                    compAselect.add(myOptionrev);
-                                    compBselect.add(myOption2rev);
-                                }*/
                                 myOption = document.createElement("option");
                                 var myOption2 = document.createElement("option");
                                 myOption.text = 'Caps';
@@ -298,7 +263,6 @@ function checkDia(obj) {
                         } else {
                             Object.keys(response).forEach(function (key) {
                                 arrRec.push(key);
-
                             });
                             arrRec.shift();
                             arrRec.pop();
@@ -335,8 +299,6 @@ function checkDia(obj) {
                                                 var val = value[key];
                                                 if (val !== null && val !== "None")
                                                     somearr.push(key)
-                                            } else {
-
                                             }
                                         }
                                     });
@@ -345,16 +307,6 @@ function checkDia(obj) {
                                     //alert(names[el] + " " + el);
                                     dict[namesarr[el]] = somearr;
                                 }
-                            }
-
-                            length = compAselect.options.length;
-                            for (k = length - 1; k > 0; k--) {
-                                compAselect.options[k] = null;
-                            }
-
-                            lengthB = compBselect.options.length;
-                            for (k = lengthB - 1; k > 0; k--) {
-                                compBselect.options[k] = null;
                             }
 
                             Object.keys(dict).forEach(function (key) {
@@ -394,6 +346,7 @@ function checkDia(obj) {
                             compAselect.add(myOptionss);
                             compBselect.add(myOptions);
                         }
+                        getDictA(compAselect);
                     } else {
                         obj.style.borderColor = "red";
                     }
@@ -401,4 +354,492 @@ function checkDia(obj) {
             });
         }
     }
+}
+
+
+function getDictA(obj) {
+    var compAselect = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[19].childNodes[0];
+    var compBselect = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[20].childNodes[0];
+
+    var compAvar1 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[27].childNodes[0];
+    var compBvar1 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[28].childNodes[0];
+
+    var compAvar2 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[31].childNodes[0];
+    var compBvar2 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[32].childNodes[0];
+
+    var specialA = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[26].childNodes[0];
+
+    length = compAvar1.options.length;
+    for (k = length - 1; k >= 0; k--) {
+        compAvar1.options[k] = null;
+    }
+    length = compAvar2.options.length;
+    for (k = length - 1; k >= 0; k--) {
+        compAvar2.options[k] = null;
+    }
+
+    compAvar1.disabled = false;
+    compAvar2.disabled = true;
+
+    compAvar1.style.borderColor = "blue";
+    compAvar2.style.borderColor = "black";
+    specialA.style.borderColor = "violet";
+
+    if (obj.value === "SPECIAL") {
+        specialA.readOnly = false;
+        specialA.style.borderColor = "blue";
+    } else {
+        specialA.value = "";
+        specialA.readOnly = true;
+    }
+
+    //--------------------------------------------
+
+    var compSelected = convertNameOfFlanges(obj.options[obj.selectedIndex].text);
+    if (compSelected === "TReducer" || compSelected === "Reducer" || compSelected === "TReducerPieceDIN" || compSelected === "ReducerDIN") {
+        compAvar1.disabled = false;
+        compAvar1.style.borderColor = "blue";
+        var someOption = document.createElement("option");
+        someOption.text = "Big";
+        compAvar1.add(someOption);
+        var someOption2 = document.createElement("option");
+        someOption2.text = "Small";
+        compAvar1.add(someOption2);
+    }
+
+    //alert(CapsInside.length + " " + CapsInside[0] + " " + CapsInside[1]);
+    if (compSelected === "Caps") {
+        if (CapsInside.length === 1) {
+        } else {
+            compAvar1.disabled = false;
+            compAvar1.style.borderColor = "blue";
+            myOption = document.createElement("option");
+            var myOption2 = document.createElement("option");
+            myOption.text = 'T <= ' + CapsInside[1];
+            myOption2.text = 'T > ' + CapsInside[1];
+            compAvar1.add(myOption);
+            compAvar1.add(myOption2);
+        }
+    }
+
+    Object.keys(dict).forEach(function (key) {
+        if (key === compSelected) {
+            var value = dict[key];
+            for (el in value) {
+                var myOption = document.createElement("option");
+                myOption.text = convertFlange(value[el]);
+                compAvar1.add(myOption);
+            }
+        }
+    });
+
+    if (compAselect.value === "Angle90" || compAselect.value === "Angle180" || compAselect.value === "TPieceDIN" || compAselect.value === convertNameOfFlanges("TPiece")) {
+        compAvar1.disabled = true;
+        compAvar1.style.borderColor = "black";
+    }
+
+    if (compAselect.value === "TEE EQUAL") {
+        length = compAvar1.options.length;
+        for (k = length - 1; k >= 0; k--) {
+            compAvar1.options[k] = null;
+        }
+    }
+
+    getVar2A(compAvar1);
+}
+
+function getDictB(obj) {
+    var compAselect = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[20].childNodes[0];
+    var compBselect = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[20].childNodes[0];
+
+    var compAvar1 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[28].childNodes[0];
+    var compBvar1 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[28].childNodes[0];
+
+    var compAvar2 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[32].childNodes[0];
+    var compBvar2 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[32].childNodes[0];
+
+    var specialA = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[29].childNodes[0];
+
+    length = compAvar1.options.length;
+    for (k = length - 1; k >= 0; k--) {
+        compAvar1.options[k] = null;
+    }
+    length = compAvar2.options.length;
+    for (k = length - 1; k >= 0; k--) {
+        compAvar2.options[k] = null;
+    }
+
+    compAvar1.disabled = false;
+    compAvar2.disabled = true;
+
+    compAvar1.style.borderColor = "blue";
+    compAvar2.style.borderColor = "black";
+    specialA.style.borderColor = "violet";
+
+    if (obj.value === "SPECIAL") {
+        specialA.readOnly = false;
+        specialA.style.borderColor = "blue";
+    } else {
+        specialA.value = "";
+        specialA.readOnly = true;
+    }
+
+    //--------------------------------------------
+
+    var compSelected = convertNameOfFlanges(obj.options[obj.selectedIndex].text);
+    if (compSelected === "TReducer" || compSelected === "Reducer" || compSelected === "TReducerPieceDIN" || compSelected === "ReducerDIN") {
+        compAvar1.disabled = false;
+        compAvar1.style.borderColor = "blue";
+        var someOption = document.createElement("option");
+        someOption.text = "Big";
+        compAvar1.add(someOption);
+        var someOption2 = document.createElement("option");
+        someOption2.text = "Small";
+        compAvar1.add(someOption2);
+    }
+
+    //alert(CapsInside.length + " " + CapsInside[0] + " " + CapsInside[1]);
+    if (compSelected === "Caps") {
+        if (CapsInside.length === 1) {
+        } else {
+            compAvar1.disabled = false;
+            compAvar1.style.borderColor = "blue";
+            myOption = document.createElement("option");
+            var myOption2 = document.createElement("option");
+            myOption.text = 'T <= ' + CapsInside[1];
+            myOption2.text = 'T > ' + CapsInside[1];
+            compAvar1.add(myOption);
+            compAvar1.add(myOption2);
+        }
+    }
+
+    Object.keys(dict).forEach(function (key) {
+        if (key === compSelected) {
+            var value = dict[key];
+            for (el in value) {
+                var myOption = document.createElement("option");
+                myOption.text = convertFlange(value[el]);
+                compAvar1.add(myOption);
+            }
+        }
+    });
+
+    if (compAselect.value === "Angle90" || compAselect.value === "Angle180" || compAselect.value === "TPieceDIN" || compAselect.value === convertNameOfFlanges("TPiece")) {
+        compAvar1.disabled = true;
+        compAvar1.style.borderColor = "black";
+    }
+
+    if (compAselect.value === "TEE EQUAL") {
+        length = compAvar1.options.length;
+        for (k = length - 1; k >= 0; k--) {
+            compAvar1.options[k] = null;
+        }
+    }
+
+    getVar2B(compAvar1);
+}
+
+function getVar2A(obj) {
+    var diameter = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[16].childNodes[0].value;
+
+    var compAselect = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[19].childNodes[0];
+    var compBselect = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[20].childNodes[0];
+
+    var compAvar1 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[27].childNodes[0];
+    var compBvar1 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[28].childNodes[0];
+
+    var compAvar2 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[31].childNodes[0];
+    var compBvar2 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[32].childNodes[0];
+
+    var specialA = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[26].childNodes[0];
+
+    length = compAvar2.options.length;
+    for (k = length - 1; k >= 0; k--) {
+        compAvar2.options[k] = null;
+    }
+
+    if (obj.value === "Big" || obj.value === "Small") {
+        nameForAjax = convertNameOfFlanges(compAselect.options[compAselect.selectedIndex].text);
+
+        $.ajax({
+            type: 'GET',
+            url: "/checkDiaTwo",
+            data: {
+                diameter: diameter,
+                type: nameForAjax,
+                parameter: obj.value
+            },
+            success: function (response) {
+                if (response["valid"]) {
+                    var receive = JSON.parse(response["data"]);
+                    Object.keys(receive).forEach(function (key) {
+                        var value = receive[key];
+                        Object.keys(value).forEach(function (key) {
+                            var tmp = value[key];
+                            var myOption = document.createElement("option");
+                            myOption.text = tmp;
+                            if (tmp !== null) {
+                                compAvar2.disabled = false;
+                                compAvar2.style.borderColor = "blue";
+                                compAvar2.add(myOption);
+                            }
+                        });
+                    });
+                }
+            }
+        });
+    }
+
+    if (compAselect.value === "Weldolet") {
+        $.ajax({
+            type: 'GET',
+            url: "/checkDiaTwo",
+            data: {
+                diameter: diameter,
+                type: "Weldolet",
+                parameter: obj.value
+            },
+            success: function (response) {
+                if (response["valid"]) {
+                    var receive = JSON.parse(response["data"]);
+                    Object.keys(receive).forEach(function (key) {
+                        var value = receive[key];
+                        Object.keys(value).forEach(function (key) {
+                            var tmp = value[key];
+                            var myOption = document.createElement("option");
+                            let somestr = key;
+                            myOption.text = convertWeldolet(somestr);
+                            if (tmp !== null) {
+                                compAvar2.disabled = false;
+                                compAvar2.style.borderColor = "blue";
+                                compAvar2.add(myOption);
+                            }
+                        });
+                    });
+                }
+            }
+        });
+    }
+}
+
+
+function getVar2B(obj) {
+    var diameter = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[16].childNodes[0].value;
+
+    var compAselect = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[20].childNodes[0];
+    var compBselect = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[20].childNodes[0];
+
+    var compAvar1 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[27].childNodes[0];
+    var compBvar1 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[28].childNodes[0];
+
+    var compAvar2 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[32].childNodes[0];
+    var compBvar2 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[32].childNodes[0];
+
+    var specialA = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[29].childNodes[0];
+
+    length = compAvar2.options.length;
+    for (k = length - 1; k >= 0; k--) {
+        compAvar2.options[k] = null;
+    }
+
+    if (obj.value === "Big" || obj.value === "Small") {
+        nameForAjax = convertNameOfFlanges(compAselect.options[compAselect.selectedIndex].text);
+
+        $.ajax({
+            type: 'GET',
+            url: "/checkDiaTwo",
+            data: {
+                diameter: diameter,
+                type: nameForAjax,
+                parameter: obj.value
+            },
+            success: function (response) {
+                if (response["valid"]) {
+                    var receive = JSON.parse(response["data"]);
+                    Object.keys(receive).forEach(function (key) {
+                        var value = receive[key];
+                        Object.keys(value).forEach(function (key) {
+                            var tmp = value[key];
+                            var myOption = document.createElement("option");
+                            myOption.text = tmp;
+                            if (tmp !== null) {
+                                compAvar2.disabled = false;
+                                compAvar2.style.borderColor = "blue";
+                                compAvar2.add(myOption);
+                            }
+                        });
+                    });
+                }
+            }
+        });
+    }
+
+    if (compAselect.value === "Weldolet") {
+        $.ajax({
+            type: 'GET',
+            url: "/checkDiaTwo",
+            data: {
+                diameter: diameter,
+                type: "Weldolet",
+                parameter: obj.value
+            },
+            success: function (response) {
+                if (response["valid"]) {
+                    var receive = JSON.parse(response["data"]);
+                    Object.keys(receive).forEach(function (key) {
+                        var value = receive[key];
+                        Object.keys(value).forEach(function (key) {
+                            var tmp = value[key];
+                            var myOption = document.createElement("option");
+                            let somestr = key;
+                            myOption.text = convertWeldolet(somestr);
+                            if (tmp !== null) {
+                                compAvar2.disabled = false;
+                                compAvar2.style.borderColor = "blue";
+                                compAvar2.add(myOption);
+                            }
+                        });
+                    });
+                }
+            }
+        });
+    }
+}
+
+
+function calculate(obj) {
+    var diameter = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[16].childNodes[0].value;
+    var length = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[17].childNodes[0].value;
+    var weld = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[18].childNodes[0].value;
+
+    var compAselect = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[19].childNodes[0];
+    var compBselect = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[20].childNodes[0];
+
+    var compAvar1 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[27].childNodes[0];
+    var compBvar1 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[28].childNodes[0];
+
+    var compAvar2 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[31].childNodes[0];
+    var compBvar2 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[32].childNodes[0];
+
+    var specialA = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[26].childNodes[0];
+    var specialB = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[29].childNodes[0];
+
+    var rez = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[36].childNodes[1];
+
+    $.ajax({
+        type: 'GET',
+        url: "/calculate",
+        data: {
+            compAname: convertNameOfFlanges(compAselect.value),
+            compAprops: compAvar2.value,
+            compAweld: weld, //--------
+            compAvar: compAvar1.value,
+            compBname: convertNameOfFlanges(compBselect.value),
+            compBprops: compBvar2.value,
+            compBweld: weld, //----------
+            compBvar: compBvar1.value,
+            diameter: diameter,
+            length: length,
+            compAinput: specialA.value,
+            compBinput: specialB.value
+        },
+        success: function (response) {
+            //alert(1);
+            if (response['valid'] === false) {
+                alert(response['reason']);
+                rez.value = 'error ocured';
+            } else {
+                rez.value = response["instance"];
+            }
+
+        }
+    });
+}
+
+function convertFlange(somestr) {
+    if (somestr === 'PN212')
+        somestr = 'PN2.5';
+    return somestr;
+}
+
+function convertWeldolet(somestr) {
+    if (somestr === 'weldolet_diam1')
+        somestr = '3/8 inches';
+    if (somestr === 'weldolet_diam2')
+        somestr = '1/2 inches';
+    if (somestr === 'weldolet_diam3')
+        somestr = '3/4 inches';
+    if (somestr === 'weldolet_diam4')
+        somestr = '1 inches';
+    if (somestr === 'weldolet_diam5')
+        somestr = '1-1/2 inches';
+    if (somestr === 'weldolet_diam6')
+        somestr = '2 inches';
+    if (somestr === 'weldolet_diam7')
+        somestr = '3 inches';
+    if (somestr === 'weldolet_diam8')
+        somestr = '4 inches';
+    if (somestr === 'weldolet_diam9')
+        somestr = '6 inches';
+    if (somestr === 'weldolet_diam10')
+        somestr = '8 inches';
+    if (somestr === 'weldolet_diam11')
+        somestr = '10 inches';
+    if (somestr === 'weldolet_diam12')
+        somestr = '12 inches';
+    if (somestr === 'weldolet_diam13')
+        somestr = '14 inches';
+    if (somestr === 'weldolet_diam14')
+        somestr = '16 inches';
+    if (somestr === 'weldolet_diam15')
+        somestr = '18 inches';
+    if (somestr === 'weldolet_diam16')
+        somestr = '20 inches';
+    if (somestr === 'weldolet_diam17')
+        somestr = '24 inches';
+    return somestr;
+}
+
+function checkLength(obj) {
+    if (isFinite(obj.value)) {
+        obj.style.borderColor = "blue";
+    } else {
+        obj.style.borderColor = "red";
+    }
+}
+
+
+function convertNameOfFlanges(somestr) {
+    if (somestr === 'TPiece') {
+        return 'TEE EQUAL'
+    }
+    if (somestr === 'WeldingNeckFlangASAASTM') {
+        return 'FLANGE Weldingneck'
+    }
+    if (somestr === 'WeldingBend') {
+        return 'ELBOW'
+    }
+    if (somestr === 'InsertFlang') {
+        return 'FLANGE Insert'
+    }
+    if (somestr === 'TReducer') {
+        return 'TEE REDUCING'
+    }
+
+    if (somestr === 'TEE EQUAL') {
+        return 'TPiece'
+    }
+    if (somestr === 'FLANGE Weldingneck') {
+        return 'WeldingNeckFlangASAASTM'
+    }
+    if (somestr === 'ELBOW') {
+        return 'WeldingBend'
+    }
+    if (somestr === 'FLANGE Insert') {
+        return 'InsertFlang'
+    }
+    if (somestr === 'TEE REDUCING') {
+        return 'TReducer'
+    }
+    return somestr;
 }

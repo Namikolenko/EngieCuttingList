@@ -21,5 +21,7 @@ from base import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.renderBaseHTML),
-    url(r'^checkDia/$', views.checkdia, name="GetSelectByDiameter")
+    url(r'^checkDia/$', views.checkdia, name="GetSelectByDiameter"),
+    url(r'^checkDiaTwo/$', views.getadditionaldata, name="GetAdditionalForSmallBig"),
+    url(r'^calculate/$', views.calculation, name="Calculate"),
 ]
