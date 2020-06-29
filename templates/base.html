@@ -107,10 +107,7 @@
                                 <div style="margin-left: 10px;">Batch</div>
                                 <div style="margin-left: 15px;">Charge</div>
                                 <div style="margin-left: 8px;">Comment</div>
-                                <div style="margin-left: 150px;">
-                                    <input type="checkbox" style="width: 15px; height: 15px">
-                                </div>
-                                <div style="margin-left: 5px;">Use DN</div>
+
                             </div>
                             <div class="row">
                                 <div style="margin-left: 5px"><input class="table-control" id="butchHolder"
@@ -123,49 +120,69 @@
                                                                      style="width: 80px; height: 25px"/></div>
                                 <div style="margin-left: 5px"><input class="table-control" id="diameterHolder"
                                                                      style="width: 110px; height: 25px"/></div>
-                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px"></select></div>
-                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px"></select></div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black"></select></div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black"></select></div>
                                 <div style="margin-left: 5px"><input class="table-control" id="butchHolder"
                                                                      style="width: 50px; height: 25px"/></div>
                                 <div style="margin-left: 5px"><input class="table-control" id="butchHolder"
                                                                      style="width: 50px; height: 25px"/></div>
                                 <div style="margin-left: 5px"><input class="table-control" id="butchHolder"
                                                                      style="width: 100px; height: 25px"/></div>
-                                <button style="float: right; margin-left: 125px; width: 100px; height: 25px; margin-top: 0px; text-align: center; margin-bottom: 0px"
-                                        class="btn" type="button">Calculate
-                                </button>
+                                <div style="margin-right: 10px">
+                                    <input type="checkbox" style="width: 15px; height: 15px">
+                                    Use DN
+                                </div>
                             </div>
                             <div class="row">
-                                <div style="margin-left: 405px"><select style="width: 105px; height: 25px"></select>
+                                <div style="margin-left: 287px"><input
+                                        style="width: 110px; height: 25px; border-color: red" readonly placeholder="SPECIAL A"/>
                                 </div>
-                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px"></select></div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black"></select>
+                                </div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black"></select></div>
+                                <div style="margin-left: 5px"><input
+                                        style="width: 110px; height: 25px; border-color: red" readonly placeholder="SPECIAL B"/>
+                                </div>
                             </div>
                             <div class="row">
-                                <div style="margin-left: 405px"><select style="width: 105px; height: 25px"></select>
+                                <div style="margin-left: 405px"><select style="width: 105px; height: 25px; border-color: black"></select>
                                 </div>
-                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px"></select></div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black"></select></div>
                             </div>
                             <div class="row">
                                 <div style="margin-left: 405px"><select style="width: 105px; height: 25px">
-                                    <option value="">Choose value</option>
                                     <option>PE</option>
                                     <option selected>BE</option>
                                     <option>TE</option>
                                     <option>SE</option>
                                 </select></div>
                                 <div style="margin-left: 5px"><select style="width: 105px; height: 25px">
-                                    <option value="">Choose value</option>
                                     <option>PE</option>
                                     <option selected>BE</option>
                                     <option>TE</option>
                                     <option>SE</option>
                                 </select></div>
+                                <div style="margin-right: 10px">Berekende waarde: <input
+                                        style="width: 110px; height: 25px">
+                                    <button type="button" class="btn" style="margin: 0px">Calculate</button>
+                                </div>
                             </div>
                         </td>
                     </tr>
                 </thread>
             </table>
         </form>
+    </div>
+    <div class="container" id="tableDiv">
+        <button class="btn" type="button" onclick="createTable()">
+            Add new piece (o.i.d.)
+        </button>
+        <button style="float: right; margin-right: 300px;" class="btn" type="button" onclick="deleteTable()">
+            Delete
+        </button>
+        <button style="float: right; margin-right: 30px;" type="button" class="btn" onclick="topFunction()">
+            Back to top
+        </button>
     </div>
 </section>
 <script src="{% static 'scripts/base.js' %}"></script>
