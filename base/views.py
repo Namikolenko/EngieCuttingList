@@ -85,14 +85,14 @@ def group1(name, var, diameter):
     var = ParseValve(var)
     var = ParseFlange212(var)
     print(var)
-    Model = apps.get_model('field', name)
+    Model = apps.get_model('base', name)
     model = Model.objects.get(pipe_diam=diameter)
     return getattr(model, var)
 
 
 def group2(name, var, var2, diameter):
     if name == 'Caps' and diameter >= 700:
-        parsed = var.split(' ')
+        parsed = var2.split(' ')
         print(parsed)
         if parsed[1] == '>':
             return Caps.objects.get(pipe_diam=diameter).install_length
@@ -100,10 +100,10 @@ def group2(name, var, var2, diameter):
             return Caps.objects.get(pipe_diam=diameter).install_length_T
     if name == "TPiece" or name == 'TPieceDIN' or (name == 'Caps' and diameter < 700):
         print('got here ')
-        Model = apps.get_model('field', name)
+        Model = apps.get_model('base', name)
         return Model.objects.get(pipe_diam=diameter).install_length
     if name == "TReducer" or name == 'TReducerPieceDIN':
-        Model = apps.get_model('field', name)
+        Model = apps.get_model('base', name)
         if var2 == "Big":
             print('sup')
             return Model.objects.get(Q(pipe_diam_big=diameter) & Q(pipe_diam_small=var)).install_length_big
@@ -134,8 +134,8 @@ def group2(name, var, var2, diameter):
 
 
 def group3(name, var, var2, diameter):
-    var2 = ParseWeldolet(var2)
-    return getattr(Weldolet.objects.get(Q(pipe_diam=diameter) & (Q(size=var))), var2)
+    var = ParseWeldolet(var)
+    return getattr(Weldolet.objects.get(Q(pipe_diam=diameter) & (Q(size=var2))), var)
 
 
 def calculation(request):
@@ -146,13 +146,13 @@ def calculation(request):
     compBname = request.GET.get("compBname", None)
     compBvar1 = request.GET.get("compBprops", None)
     compBvar2 = request.GET.get("compBvar", None)
-    print(compAname, compAvar1, compAvar2, compBname, compBvar1, compBvar2)
+    print(compAname, compAvar1, compAvar2, compBname, compBvar1, compBvar2, weld)
     if compAname == '' and compBname == '' or weld == '':
         return JsonResponse({'reason': 'no components have been chosen', "valid": False},
                             content_type="application/json")
-    if weld == '':
-        return JsonResponse({'reason': 'no weld values are given', "valid": False}, content_type="application/json")
-    if weld != '':
+    if weld is None:
+        return JsonResponse({'reason': 'no weld value is given', "valid": False}, content_type="application/json")
+    if weld is not None:
         try:
             weld = float(weld)
         except ValueError:
@@ -187,7 +187,7 @@ def calculation(request):
     inbs2 = 0
     decider = finder(compAname)
     if decider == 'group1':
-        inbs = group1(compAname, compAvar1, dia)
+        inbs = group1(compAname, compAvar2, dia)
     elif decider == 'group2':
         inbs = group2(compAname, compAvar1, compAvar2, dia)
     elif decider == 'group3':
@@ -198,7 +198,7 @@ def calculation(request):
         inbs = 0
     decider2 = finder(compBname)
     if decider2 == 'group1':
-        inbs2 = group1(compBname, compBvar1, dia)
+        inbs2 = group1(compBname, compBvar2, dia)
         print(inbs2, 'wtf1')
     elif decider2 == 'group2':
         inbs2 = group2(compBname, compBvar1, compBvar2, dia)

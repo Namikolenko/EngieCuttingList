@@ -732,11 +732,10 @@ function calculate(obj) {
         data: {
             compAname: convertNameOfFlanges(compAselect.value),
             compAprops: compAvar2.value,
-            compAweld: weld, //--------
+            weld: weld, //--------
             compAvar: compAvar1.value,
             compBname: convertNameOfFlanges(compBselect.value),
             compBprops: compBvar2.value,
-            compBweld: weld, //----------
             compBvar: compBvar1.value,
             diameter: diameter,
             length: length,
