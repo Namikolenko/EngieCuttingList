@@ -337,7 +337,7 @@ def checkdia(request):
                        'name6': 'WeldingNeckFlangDIN', 'name7': 'Flange13', 'name8': 'Flange11',
                        'name9': 'Flange2with35', 'name10': 'Caps'}
         if temp1 or temp2 or temp3 or temp4 or temp5 or temp6 or temp7 or temp8 or temp9 or temp10:
-            jsonlist = json.dumps(temp5)
+            jsonlist1 = json.dumps(temp5)
             jsonlist2 = json.dumps(temp6)
             jsonlist3 = json.dumps(temp7)
             jsonlist4 = json.dumps(temp9)
@@ -349,7 +349,7 @@ def checkdia(request):
             jsonlist10 = json.dumps(list(temp10), cls=DjangoJSONEncoder)
             all_spieces = json.dumps(all_spieces)
             return JsonResponse(
-                {"valid": True, "data1": jsonlist, "data2": jsonlist2, "data3": jsonlist3, "data4": jsonlist4,
+                {"valid": True, "data1": jsonlist1, "data2": jsonlist2, "data3": jsonlist3, "data4": jsonlist4,
                  "data5": jsonlist5, "data6": jsonlist6,
                  "data7": jsonlist7, "data8": jsonlist8, "data9": jsonlist9, "data10": jsonlist10,
                  'names': all_spieces},
@@ -392,14 +392,14 @@ def checkdia(request):
         temp8 = InsertFlang.objects.all().filter(pipe_diam=dia).values('ibs150', 'ibs300', 'ibs600', 'ibs900',
                                                                        'ibs1500')
         if temp1 or temp2 or temp3 or temp4 or temp5 or temp6 or temp7 or temp8:
-            jsonlist1 = json.dumps(list(temp5), cls=DjangoJSONEncoder)
-            jsonlist2 = json.dumps(list(temp8), cls=DjangoJSONEncoder)
-            jsonlist3 = json.dumps(list(temp4), cls=DjangoJSONEncoder)
-            jsonlist4 = json.dumps(list(temp3), cls=DjangoJSONEncoder)
-            jsonlist5 = json.dumps(list(temp9), cls=DjangoJSONEncoder)
-            jsonlist6 = json.dumps(list(temp10), cls=DjangoJSONEncoder)
-            jsonlist7 = json.dumps(temp6)
-            jsonlist8 = json.dumps(temp7)
+            jsonlist1 = json.dumps(list(temp3), cls=DjangoJSONEncoder)
+            jsonlist2 = json.dumps(list(temp6), cls=DjangoJSONEncoder)
+            jsonlist3 = json.dumps(list(temp2), cls=DjangoJSONEncoder)
+            jsonlist4 = json.dumps(list(temp1), cls=DjangoJSONEncoder)
+            jsonlist5 = json.dumps(list(temp7), cls=DjangoJSONEncoder)
+            jsonlist6 = json.dumps(list(temp8), cls=DjangoJSONEncoder)
+            jsonlist7 = json.dumps(temp4)
+            jsonlist8 = json.dumps(temp5)
             all_spieces = {'name3': 'TPiece', 'name4': 'Weldolet',
                            'name5': 'WeldingNeckFlangASAASTM', 'name6': 'WeldingBend', 'name7': 'Valve',
                            'name8': 'InsertFlang', 'name9': 'TReducer', 'name10': 'Reducer', 'name11': 'SPECIAL'}
