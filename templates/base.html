@@ -99,14 +99,15 @@
                             <div class="row">
                                 <div style="margin-left: 5px;">Nr</div>
                                 <div style="margin-left: 40px;">Spool</div>
-                                <div style="margin-left: 15px;">Diameter</div>
-                                <div style="margin-left: 10px;">Wanddikte</div>
-                                <div style="margin-left: 10px;">Voor-openning</div>
+                                <div style="margin-left: 15px;">Wanddikte</div>
+                                <div style="margin-left: 10px;">Diameter</div>
+                                <div style="margin-left: 20px;">Length</div>
+                                <div style="margin-left: 18px;">Voor-openning</div>
                                 <div style="margin-left: 10px;">Component A</div>
                                 <div style="margin-left: 15px;">Component B</div>
                                 <div style="margin-left: 10px;">Batch</div>
                                 <div style="margin-left: 15px;">Charge</div>
-                                <div style="margin-left: 8px;">Comment</div>
+                                <div style="margin-left: 15px;">Comment</div>
 
                             </div>
                             <div class="row">
@@ -115,17 +116,19 @@
                                 <div style="margin-left: 5px"><input class="table-control" id="spoolHolder"
                                                                      style="width: 50px; height: 25px"/></div>
                                 <div style="margin-left: 5px"><input class="table-control" id="diameterHolder"
-                                                                     style="width: 70px; height: 25px"/></div>
-                                <div style="margin-left: 5px"><input class="table-control" id="diameterHolder"
                                                                      style="width: 80px; height: 25px"/></div>
                                 <div style="margin-left: 5px"><input class="table-control" id="diameterHolder"
+                                                                     style="width: 70px; height: 25px; border-color: red" oninput="checkDia(this)"/></div>
+                                <div style="margin-left: 5px"><input class="table-control" id="diameterHolder"
+                                                                     style="width: 70px; height: 25px"/></div>
+                                <div style="margin-left: 5px"><input class="table-control" id="diameterHolder"
                                                                      style="width: 110px; height: 25px"/></div>
-                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black"></select></div>
-                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black"></select></div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black" disabled></select></div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black" disabled></select></div>
                                 <div style="margin-left: 5px"><input class="table-control" id="butchHolder"
                                                                      style="width: 50px; height: 25px"/></div>
                                 <div style="margin-left: 5px"><input class="table-control" id="butchHolder"
-                                                                     style="width: 50px; height: 25px"/></div>
+                                                                     style="width: 60px; height: 25px"/></div>
                                 <div style="margin-left: 5px"><input class="table-control" id="butchHolder"
                                                                      style="width: 100px; height: 25px"/></div>
                                 <div style="margin-right: 10px">
@@ -133,24 +136,24 @@
                                     Use DN
                                 </div>
                             </div>
-                            <div class="row">
-                                <div style="margin-left: 287px"><input
-                                        style="width: 110px; height: 25px; border-color: red" readonly placeholder="SPECIAL A"/>
+                            <div class="row" style="margin-top: 5px">
+                                <div style="margin-left: 365px"><input
+                                        style="width: 110px; height: 25px; border-color: violet" readonly placeholder="SPECIAL A"/>
                                 </div>
-                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black"></select>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black" disabled></select>
                                 </div>
-                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black"></select></div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black" disabled></select></div>
                                 <div style="margin-left: 5px"><input
-                                        style="width: 110px; height: 25px; border-color: red" readonly placeholder="SPECIAL B"/>
+                                        style="width: 110px; height: 25px; border-color: violet" readonly placeholder="SPECIAL B"/>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div style="margin-left: 405px"><select style="width: 105px; height: 25px; border-color: black"></select>
+                            <div class="row" style="margin-top: 5px">
+                                <div style="margin-left: 483px"><select style="width: 105px; height: 25px; border-color: black" disabled></select>
                                 </div>
-                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black"></select></div>
+                                <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black" disabled></select></div>
                             </div>
-                            <div class="row">
-                                <div style="margin-left: 405px"><select style="width: 105px; height: 25px">
+                            <div class="row" style="margin-top: 5px">
+                                <div style="margin-left: 483px"><select style="width: 105px; height: 25px">
                                     <option>PE</option>
                                     <option selected>BE</option>
                                     <option>TE</option>
