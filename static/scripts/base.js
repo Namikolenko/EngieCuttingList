@@ -112,7 +112,9 @@ function checkDia(obj) {
                     CapsInside = [];
                     TReducersIncome = false;
                     ReducersIncome = false;
+                    alert(JSON.stringify(response));
                     if (response["valid"]){
+                        alert(2);
                         let tmpArr = [];
                         dict = {};
                         arrRec = [];

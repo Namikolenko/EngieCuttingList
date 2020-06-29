@@ -282,6 +282,7 @@ def getadditionaldata(request):
 
 # Search for components' objects with suitable diamater
 def checkdia(request):
+    print("here")
     dia = float(request.GET.get("diameter", None))
     flag = request.GET.get("flag", None)
     if flag == "true":
