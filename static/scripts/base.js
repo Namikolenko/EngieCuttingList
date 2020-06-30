@@ -37,8 +37,47 @@ function deleteTable() {
 
 
 function CSVExportMaster() {
-    //TO IMPLEMENT
-    alert('Error');
+    const element = document.createElement('a');
+
+    var separator = ';'; //--------------------------------------------------------------SWITCH BETWEEN ';' AND ',' TO DEFINE THE OUTPUT-----------------------------
+    var nameDoc = document.getElementById('document');
+
+    var line = "Document" + separator + "Revision" + separator + "ISO" + separator + "Project Number" + separator + "Date" + separator + "Name" + separator + "Component" + separator + "Batch Number" + separator + "Charge Number" + separator + "Spool" + separator + "Weld" + separator + "Wall Thickness" + separator + "BBE" + separator + "Diameter" + separator + "Calculated Length" + separator + "Comments" + "\n";
+
+    for (var i = 0; i < document.getElementsByTagName("table").length; i++) {
+        var compA = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[19].childNodes[0].value;
+        var compB = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[20].childNodes[0].value;
+        var isoN = document.getElementById('iso').value;
+        var batchN = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[21].childNodes[0].value;
+        var chargeN = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[22].childNodes[0].value;
+        var spool = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[14].childNodes[0].value;
+
+        var weldA = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[18].childNodes[0].value;
+        var weldB = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[18].childNodes[0].value;
+        var wallTh = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[15].childNodes[0].value;
+        var BBEa = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[34].childNodes[0].value;
+        var BBEb = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[35].childNodes[0].value;
+        var diameter = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[16].childNodes[0].value;
+        var rezLength = document.getElementsByTagName("table")[0].rows[0].cells[0].getElementsByTagName("div")[36].childNodes[1].value;
+        var comments = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[23].childNodes[0].value;
+
+        line += nameDoc.value + separator + document.getElementById('revision').value + separator + isoN + separator + document.getElementById('projectnr').value + separator + document.getElementById('date').value + separator + document.getElementById('name').value + separator + compA + separator + batchN + separator + chargeN + separator + spool + separator + weldA + separator + wallTh + separator + BBEa + separator + diameter + separator + rezLength + separator + comments + "\n";
+        line += nameDoc.value + separator + document.getElementById('revision').value + separator + isoN + separator + document.getElementById('projectnr').value + separator + document.getElementById('date').value + separator + document.getElementById('name').value + separator + compB + separator + batchN + separator + chargeN + separator + spool + separator + weldB + separator + wallTh + separator + BBEb + separator + diameter + separator + rezLength + separator + comments + "\n";
+    }
+
+    if (nameDoc.value === "") {
+        alert('The document field is empty, enter and try again');
+    } else {
+        var fullnameDoc = nameDoc.value + '.csv';
+
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + line);
+        element.setAttribute('download', fullnameDoc);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    }
 }
 
 
@@ -347,6 +386,7 @@ function checkDia(obj) {
                             compBselect.add(myOptions);
                         }
                         getDictA(compAselect);
+                        getDictB(compBselect);
                     } else {
                         obj.style.borderColor = "red";
                     }
