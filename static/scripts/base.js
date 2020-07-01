@@ -68,6 +68,7 @@ function CSVExportMaster() {
     if (nameDoc.value === "") {
         alert('The document field is empty, enter and try again');
     } else {
+
         var fullnameDoc = nameDoc.value + '.csv';
 
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + line);
@@ -327,10 +328,10 @@ function checkDia(obj) {
 
                                 Object.keys(receive).forEach(function (key) {
                                     var value = receive[key];
-                                    //alert(JSON.stringify(value));
                                     Object.keys(value).forEach(function (key) { // Здесь key = "wallthickness"; value = 3
-                                        if (el < 4) {
+                                        if (el < 2) {
                                             var val = value[key];
+                                            //alert(val + " " + key + " " + el);
                                             if (val !== null && val !== "None")
                                                 somearr.push(val);
                                         } else {
