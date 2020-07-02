@@ -58,7 +58,7 @@ function CSVExportMaster() {
         var BBEa = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[34].childNodes[0].value;
         var BBEb = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[35].childNodes[0].value;
         var diameter = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[16].childNodes[0].value;
-        var rezLength = document.getElementsByTagName("table")[0].rows[0].cells[0].getElementsByTagName("div")[36].childNodes[1].value;
+        var rezLength = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[36].childNodes[1].value;
         var comments = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[23].childNodes[0].value;
 
         line += nameDoc.value + separator + document.getElementById('revision').value + separator + isoN + separator + document.getElementById('projectnr').value + separator + document.getElementById('date').value + separator + document.getElementById('name').value + separator + compA + separator + batchN + separator + chargeN + separator + spool + separator + weldA + separator + wallTh + separator + BBEa + separator + diameter + separator + rezLength + separator + comments + "\n";
