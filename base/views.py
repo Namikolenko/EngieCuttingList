@@ -12,6 +12,7 @@ import json
 from django.apps import apps
 from django import template
 from .parse import ParseWeldolet, ParseWeldingBend, ParseValve, ParseFlange212
+from decimal import *
 
 
 def renderBaseHTML(request):
@@ -210,7 +211,7 @@ def calculation(request):
         inbs2 = specialsizeB
     else:
         inbs2 = 0
-    resp = length - (inbs + weld) - (inbs2 + weld)
+    resp = Decimal(length) - Decimal(str(inbs)) - Decimal(str(inbs2)) - Decimal(2*weld)
     if resp <= 0:
         return JsonResponse({'reason': 'expected length is less than 0, please check again', "valid": False},
                             content_type="application/json")
