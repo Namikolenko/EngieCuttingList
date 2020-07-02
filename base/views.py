@@ -147,7 +147,7 @@ def calculation(request):
     compBvar1 = request.GET.get("compBprops", None)
     compBvar2 = request.GET.get("compBvar", None)
     print(compAname, compAvar1, compAvar2, compBname, compBvar1, compBvar2, weld)
-    if compAname == '' and compBname == '' or weld == '':
+    if compAname == '' and compBname == '':
         return JsonResponse({'reason': 'no components have been chosen', "valid": False},
                             content_type="application/json")
     if weld is None:
