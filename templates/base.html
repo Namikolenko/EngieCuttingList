@@ -157,7 +157,8 @@
                                 <div style="margin-left: 5px"><select style="width: 105px; height: 25px; border-color: black" disabled></select></div>
                             </div>
                             <div class="row" style="margin-top: 5px">
-                                <div style="margin-left: 483px"><select style="width: 105px; height: 25px">
+                                <div style="font-size: 20px; margin-left: 5px"><input type="checkbox" style="width: 25px; height: 25px" onchange="selectTable(this)"> Select table</div>
+                                <div style="margin-left: 343px"><select style="width: 105px; height: 25px">
                                     <option>PE</option>
                                     <option selected>BE</option>
                                     <option>TE</option>
@@ -184,8 +185,8 @@
         <button class="btn" type="button" onclick="createTable()">
             Add new piece (o.i.d.)
         </button>
-        <button style="float: right; margin-right: 300px;" class="btn" type="button" onclick="deleteTable()">
-            Delete
+        <button style="float: right; margin-right: 300px;" class="btn" type="button" onclick="deleteSelectedTables()">
+            Delete selected tables
         </button>
         <button style="float: right; margin-right: 30px;" type="button" class="btn" onclick="topFunction()">
             Back to top

@@ -29,10 +29,30 @@ function topFunction() {
 
 function deleteTable() {
     currentDiv = document.getElementById("tableDiv");
-    var indexTable = document.getElementsByTagName("table").length;
-    var lastTable = document.getElementsByTagName("table")[indexTable - 1];
+    var indexTable = document.getElementsByTagName("form").length;
 
-    lastTable.parentNode.removeChild(lastTable);
+    if (indexTable >= 3) {
+        var lastTable = document.getElementsByTagName("form")[indexTable - 1];
+        lastTable.style.border = "0px white";
+
+        lastTable.parentNode.removeChild(lastTable);
+    }
+}
+
+
+function deleteSelectedTables() {
+    let formsLen = document.getElementsByTagName("form").length;
+    let i = formsLen;
+    while (i >= 3) {
+        let flag = document.getElementsByTagName("form")[i - 1].getElementsByTagName("table")[0].rows[0].cells[0].getElementsByTagName("div")[34].childNodes[0].checked;
+        if (flag) {
+            let form = document.getElementsByTagName("form")[i - 1];
+            form.style.border = "0px white";
+
+            form.parentNode.removeChild(form);
+        }
+        i--;
+    }
 }
 
 
@@ -55,22 +75,28 @@ function CSVExportMaster() {
         var weldA = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[18].childNodes[0].value;
         var weldB = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[18].childNodes[0].value;
         var wallTh = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[15].childNodes[0].value;
-        var BBEa = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[34].childNodes[0].value;
-        var BBEb = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[35].childNodes[0].value;
+        var BBEa = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[35].childNodes[0].value;
+        var BBEb = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[36].childNodes[0].value;
         var diameter = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[16].childNodes[0].value;
-        var rezLength = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[36].childNodes[1].value;
+        var rezLength = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[37].childNodes[1].value;
         var comments = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[23].childNodes[0].value;
 
         let outForA = nameDoc.value + separator + document.getElementById('revision').value + separator + isoN + separator + document.getElementById('projectnr').value + separator + document.getElementById('date').value + separator + document.getElementById('name').value + separator + compA + separator + batchN + separator + chargeN + separator + spool + separator + weldA + separator + wallTh + separator + BBEa + separator + diameter + separator + rezLength + separator + comments + "\n";
         let outForB = nameDoc.value + separator + document.getElementById('revision').value + separator + isoN + separator + document.getElementById('projectnr').value + separator + document.getElementById('date').value + separator + document.getElementById('name').value + separator + compB + separator + batchN + separator + chargeN + separator + spool + separator + weldB + separator + wallTh + separator + BBEb + separator + diameter + separator + rezLength + separator + comments + "\n";
 
         if (compA === "None") {
-            if (compB !== "None") { line += outForB; }
+            if (compB !== "None") {
+                line += outForB;
+            }
         }
         if (compB === "None") {
-            if (compA !== "None") { line += outForA; }
+            if (compA !== "None") {
+                line += outForA;
+            }
         }
-        if (compA !== "None" && compB !== "None") { line += outForA + outForB; }
+        if (compA !== "None" && compB !== "None") {
+            line += outForA + outForB;
+        }
 
     }
 
@@ -784,7 +810,7 @@ function calculate(obj) {
     var specialA = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[26].childNodes[0];
     var specialB = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[29].childNodes[0];
 
-    var rez = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[36].childNodes[1];
+    var rez = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[37].childNodes[1];
 
     $.ajax({
         type: 'GET',
@@ -901,4 +927,15 @@ function convertNameOfFlanges(somestr) {
         return 'TReducer'
     }
     return somestr;
+}
+
+function selectTable(obj) {
+    //alert(obj.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode);
+    let table = obj.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+
+    if (obj.checked) {
+        table.style.border = "1.5px solid red";
+    } else {
+        table.style.border = "0px white";
+    }
 }
