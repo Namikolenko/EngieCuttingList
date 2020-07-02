@@ -61,8 +61,17 @@ function CSVExportMaster() {
         var rezLength = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[36].childNodes[1].value;
         var comments = document.getElementsByTagName("table")[i].rows[0].cells[0].getElementsByTagName("div")[23].childNodes[0].value;
 
-        line += nameDoc.value + separator + document.getElementById('revision').value + separator + isoN + separator + document.getElementById('projectnr').value + separator + document.getElementById('date').value + separator + document.getElementById('name').value + separator + compA + separator + batchN + separator + chargeN + separator + spool + separator + weldA + separator + wallTh + separator + BBEa + separator + diameter + separator + rezLength + separator + comments + "\n";
-        line += nameDoc.value + separator + document.getElementById('revision').value + separator + isoN + separator + document.getElementById('projectnr').value + separator + document.getElementById('date').value + separator + document.getElementById('name').value + separator + compB + separator + batchN + separator + chargeN + separator + spool + separator + weldB + separator + wallTh + separator + BBEb + separator + diameter + separator + rezLength + separator + comments + "\n";
+        let outForA = nameDoc.value + separator + document.getElementById('revision').value + separator + isoN + separator + document.getElementById('projectnr').value + separator + document.getElementById('date').value + separator + document.getElementById('name').value + separator + compA + separator + batchN + separator + chargeN + separator + spool + separator + weldA + separator + wallTh + separator + BBEa + separator + diameter + separator + rezLength + separator + comments + "\n";
+        let outForB = nameDoc.value + separator + document.getElementById('revision').value + separator + isoN + separator + document.getElementById('projectnr').value + separator + document.getElementById('date').value + separator + document.getElementById('name').value + separator + compB + separator + batchN + separator + chargeN + separator + spool + separator + weldB + separator + wallTh + separator + BBEb + separator + diameter + separator + rezLength + separator + comments + "\n";
+
+        if (compA === "None") {
+            if (compB !== "None") { line += outForB; }
+        }
+        if (compB === "None") {
+            if (compA !== "None") { line += outForA; }
+        }
+        if (compA !== "None" && compB !== "None") { line += outForA + outForB; }
+
     }
 
     if (nameDoc.value === "") {
@@ -96,11 +105,11 @@ function checkDia(obj) {
     var compBvar2 = obj.parentNode.parentNode.parentNode.getElementsByTagName("div")[32].childNodes[0];
 
     var length = compAselect.options.length;
-    for (k = length - 1; k >= 0; k--) {
+    for (k = length - 1; k > 0; k--) {
         compAselect.options[k] = null;
     }
     length = compBselect.options.length;
-    for (k = length - 1; k >= 0; k--) {
+    for (k = length - 1; k > 0; k--) {
         compBselect.options[k] = null;
     }
     length = compAvar1.options.length;
@@ -426,6 +435,11 @@ function getDictA(obj) {
     compAvar2.style.borderColor = "black";
     specialA.style.borderColor = "violet";
 
+    if (compAselect.value === "None") {
+        compAvar1.disabled = true;
+        compAvar1.style.borderColor = "black"
+    }
+
     if (obj.value === "SPECIAL") {
         specialA.readOnly = false;
         specialA.style.borderColor = "blue";
@@ -516,6 +530,11 @@ function getDictB(obj) {
     compAvar1.style.borderColor = "blue";
     compAvar2.style.borderColor = "black";
     specialA.style.borderColor = "violet";
+
+    if (compBselect.value === "None") {
+        compBvar1.disabled = true;
+        compBvar1.style.borderColor = "black"
+    }
 
     if (obj.value === "SPECIAL") {
         specialA.readOnly = false;
