@@ -39,8 +39,8 @@ def ParseWeldolet(otherstr):
 def ParseWeldingBend(string):
     if string == 'LR90R':
         return 'L_R_90_R'
-    elif string == 'LR90B':
-        return 'L_R_90_B'
+    elif string == 'LR45B':
+        return 'L_R_45_B'
     elif string == 'LR180':
         return 'L_R_180'
     elif string == 'SR180':
